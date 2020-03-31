@@ -55,9 +55,15 @@ for k = 1:2
     X{k} = squeeze(log(var(reshape(EPO{k}*S, length(wnd),[],2*nof))));
 end
 
+S = S(:,1:6);
+filtered1 = EPO{1} * S;
+filtered2 = EPO{2} * S;
+
 % train LDA classifier (preferably with gradual outputs) (TODO: fill in)
-u1 = transpose(mean(EPO{1}));
-u2 = transpose(mean(EPO{2}));
+E1 = cov(filtered1);
+E2 = cov(filtered2);
+u1 = transpose(mean(filtered1));
+u2 = transpose(mean(filtered2));
 w = inv(E1 + E2)*(u2-u1);
 b = -0.5 * ( transpose(w) * (u1 + u2));
 

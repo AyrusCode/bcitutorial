@@ -24,7 +24,7 @@ B = [B;X]; B = B(end-length(T)+1:end,:);
 % apply temporal and spatial filters to the buffer B, calculate log-variance, 
 % and apply the linear classifier (TODO: fill in...)
 variance= var(T*(B*S(:,1:6)));
-y = sign(w*log(variance)+b);
+y = sign(log(variance)*w+b);
 %B= 200 x 118
 %w= 118 x 1
 %T= 200 x 200
